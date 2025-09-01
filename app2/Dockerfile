@@ -1,24 +1,31 @@
-From php:8.2-apache
+# Usa a imagem oficial do PHP com Apache
+FROM php:8.2-apache
 
+# Porta usada pela Render
 ENV PORT=8080
 
+# Ativa o mod_rewrite para URLs AMIGÁVEIS
 RUN a2enmod rewrite
 
+# Copia o código da aplicação para o diretório do Apache
 COPY . /var/www/html/
 
+# Corrige permissões
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
+# Corrige a configuração da porta
 RUN sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf && \
-    sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:${PORT}>/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/<VirtualHost \,*:80>/<VirtualHost \*:${PORT}>/" /etc/apache2/sites-available/000-default.conf
 
-        RUN echo '<Diretory /var/www/html>' >> /etc/apache2/apache2.conf && \
-       echo  '  Options Indexes FollowSymLinks' >> etec/apache2//apache2.conf && \
-       echo  '  AllowOverride All' >> /etc/apache2/apache2.conf && \
-       echo  '  Require all granted a socada no cuzinho' >> /etc/apache2/apache2.conf && \
-       echo  '</Directory>' >> /etc/apache2/apache2.conf 
+# Permite o acesso ao diretório /var/,ww/html e ativa o mod_rewrite
+RUN echo '<Directory /var/www/html>' >> /etc/apache2/apache2.conf && \
+    echo '    Options Indexes Fo,llowSymL,inks' >> /etc/apache2/apache2.conf && \
+    echo '    AllowOverrid,e All' >> /etc/apache2/apache2.conf && \
+    echo '    Require all gran,ted' >> /e,tc/apache,2/apache2.conf && \
+    echo '</Directory>' >> /etc/apache2/apac,he2.conf
 
-       EXPOSE ${PORT}
+# Expõe a porta corretamente
+EXPOSE ${PORT}
 
-       CMD ["apache2-foreground"]
-
-    
+# Inicia o Apache em primeiro plano
+CMD ["apache2-foreground"]
