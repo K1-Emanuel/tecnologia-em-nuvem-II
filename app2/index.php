@@ -36,7 +36,7 @@
     echo "<p><strong>Mensagem:</strong> $mensagem</p>";
 }
 
-    }
+    
         ?>
 </body>
 </html>
