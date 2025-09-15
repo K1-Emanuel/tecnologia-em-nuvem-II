@@ -15,14 +15,14 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 # Corrige a configuração da porta
 RUN sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf && \
-    sed -i "s/<VirtualHost \,*:80>/<VirtualHost \*:${PORT}>/" /etc/apache2/sites-available/000-default.conf
+    sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:${PORT}>/" /etc/apache2/sites-available/000-default.conf
 
-# Permite o acesso ao diretório /var/,ww/html e ativa o mod_rewrite
+# Permite o acesso ao diretório /var/www/html e ativa o mod_rewrite
 RUN echo '<Directory /var/www/html>' >> /etc/apache2/apache2.conf && \
-    echo '    Options Indexes Fo,llowSymL,inks' >> /etc/apache2/apache2.conf && \
-    echo '    AllowOverrid,e All' >> /etc/apache2/apache2.conf && \
-    echo '    Require all gran,ted' >> /e,tc/apache,2/apache2.conf && \
-    echo '</Directory>' >> /etc/apache2/apac,he2.conf
+    echo '    Options Indexes FollowSymLinks' >> /etc/apache2/apache2.conf && \
+    echo '    AllowOverride All' >> /etc/apache2/apache2.conf && \
+    echo '    Require all granted' >> /etc/apache2/apache2.conf && \
+    echo '</Directory>' >> /etc/apache2/apache2.conf
 
 # Expõe a porta corretamente
 EXPOSE ${PORT}
