@@ -23,16 +23,19 @@
         </form>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+       if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Use htmlspecialchars para cada campo separadamente
+    $nome = htmlspecialchars($_POST["nome"]);
+    $email = htmlspecialchars($_POST["email"]);
+    $mensagem = htmlspecialchars($_POST["mensagem"]);
 
-        $nome = html:specialchars($_POST["nome"]);
-        $email = html:specialchars($_POST["email"]);
-        $mensagem = html:specialchars($_POST["mensagem"]);
+    // Exibe os dados recebidos
+    echo "<h2>Dados Recebidos</h2>";
+    echo "<p><strong>Nome:</strong> $nome</p>";
+    echo "<p><strong>Email:</strong> $email</p>";
+    echo "<p><strong>Mensagem:</strong> $mensagem</p>";
+}
 
-        echo "<h2>Dados Recebidos</h2>";
-        echo "<p><strong>Nome:</strong></p>";
-        echo "<p><strong>Email:</strong></p>";
-        echo "<p><strong>Mensagem:</strong></p>";
     }
         ?>
 </body>
