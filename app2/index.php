@@ -26,8 +26,8 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $nome = html:specialchars($_POST["nome"]);
-        $nome = html:specialchars($_POST["email"]);
-        $nome = html:specialchars($_POST["mensagem"]);
+        $email = html:specialchars($_POST["email"]);
+        $mensagem = html:specialchars($_POST["mensagem"]);
 
         echo "<h2>Dados Recebidos</h2>";
         echo "<p><strong>Nome:</strong></p>";
